@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>be1.ru</title>
+</head>
+<body>
+<p>&lt;!DOCTYPE html&gt;<br />
+&lt;html lang=&quot;ru&quot;&gt;<br />
+&lt;head&gt;<br />
+&nbsp; &nbsp; &lt;meta charset=&quot;UTF-8&quot;&gt;<br />
+&nbsp; &nbsp; &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;<br />
+&nbsp; &nbsp; &lt;title&gt;Дурак Переводной&lt;/title&gt;<br />
+&nbsp; &nbsp; &lt;script src=&quot;https://telegram.org/js/telegram-web-app.js&quot;&gt;&lt;/script&gt;<br />
+&nbsp; &nbsp; &lt;style&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; :root {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --tg-theme-bg-color: #1f2125;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --tg-theme-text-color: #ffffff;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --tg-theme-button-color: #2481cc;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --tg-theme-button-text-color: #ffffff;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; body {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: var(--tg-theme-bg-color, #1f2125);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--tg-theme-text-color, #ffffff);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, Helvetica, Arial, sans-serif;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 0;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100vh;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-sizing: border-box;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; user-select: none;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .table-area {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex: 1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-between;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 2px dashed rgba(255,255,255,0.1);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 12px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .bot-area {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-around;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-height: 70px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .bot-box {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: rgba(0,0,0,0.2);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 5px 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 12px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .deck-info {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 50%;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 15px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(-50%);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 14px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: rgba(0,0,0,0.4);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 6px 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .trump-card {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 50%;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 65px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateY(-50%) rotate(90deg);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .battle-field {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-wrap: wrap;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex: 1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow-y: auto;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .pair {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 50px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 75px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .pair .card {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: absolute;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .pair .card:nth-child(2) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 15px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 12px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .player-area {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-bottom: 5px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .hand {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 5px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow-x: auto;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-height: 85px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 5px 0;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .card {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 50px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 75px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #fff;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #000;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 6px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: колумн;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-between;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 4px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-sizing: border-box;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 12px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: bold;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-shadow: 0 2px 5px rgba(0,0,0,0.3);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cursor: pointer;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: transform 0.2s, background-color 0.2s;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-shrink: 0;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .card.red { color: #d32f2f; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .card.selected { transform: translateY(-10px); background: #e0f7fa; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .card.back {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: linear-gradient(135deg, #1565c0, #0d47a1);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: 2px solid #fff;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .controls {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 10px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .btn {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: var(--tg-theme-button-color, #2481cc);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--tg-theme-button-text-color, #ffffff);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border: none;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 10px 20px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-radius: 8px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 14px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: bold;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cursor: pointer;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .btn:disabled { opacity: 0.5; cursor: not-allowed; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; .game-status {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 14px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: bold;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 5px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-height: 20px;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &lt;/style&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;</p>
+
+<p>&nbsp; &nbsp; &lt;div class=&quot;game-status&quot; id=&quot;status&quot;&gt;Раздача карт...&lt;/div&gt;</p>
+
+<p>&nbsp; &nbsp; &lt;div class=&quot;table-area&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bot-area&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bot-box&quot; id=&quot;bot1-info&quot;&gt;Бот 1 (Карт: 6)&lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bot-box&quot; id=&quot;bot2-info&quot;&gt;Бот 2 (Карт: 6)&lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;deck-info&quot; id=&quot;deck-count&quot;&gt;Колода: 24&lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;trump-card&quot; id=&quot;trump-container&quot;&gt;&lt;/div&gt;</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;battle-field&quot; id=&quot;battle-field&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Сюда складываются карты для отбивания --&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
+&nbsp; &nbsp; &lt;/div&gt;</p>
+
+<p>&nbsp; &nbsp; &lt;div class=&quot;player-area&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;hand&quot; id=&quot;player-hand&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Карты игрока --&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;controls&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;btn&quot; id=&quot;action-btn&quot; onclick=&quot;handleAction()&quot; disabled&gt;Бито / Беру&lt;/button&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
+&nbsp; &nbsp; &lt;/div&gt;</p>
+
+<p>&nbsp; &nbsp; &lt;script&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; const tg = window.Telegram.WebApp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; tg.expand();</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const suits = [&#39;&hearts;&#39;, &#39;&diams;&#39;, &#39;&clubs;&#39;, &#39;&spades;&#39;];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; const values = [&#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;J&#39;, &#39;Q&#39;, &#39;K&#39;, &#39;A&#39;];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; const rankValue = {&#39;6&#39;:6, &#39;7&#39;:7, &#39;8&#39;:8, &#39;9&#39;:9, &#39;10&#39;:10, &#39;J&#39;:11, &#39;Q&#39;:12, &#39;K&#39;:13, &#39;A&#39;:14};</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; let deck = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let trumpSuit = &#39;&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let players = [<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 0, name: &#39;Вы&#39;, hand: [], isBot: false },<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 1, name: &#39;Бот 1&#39;, hand: [], isBot: true },<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 2, name: &#39;Бот 2&#39;, hand: [], isBot: true }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; ];<br />
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let table = []; // Массив пар [{attack: card, defense: card/null}]<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let attackerIdx = 0; // Кто ходит<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let defenderIdx = 1; // Кто отбивается<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let gamePhase = &#39;init&#39;; // &#39;attack&#39;, &#39;defense&#39;, &#39;transfer&#39;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; let selectedCards = [];</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function initGame() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deck = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; suits.forEach(s =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; values.forEach(v =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deck.push({ suit: s, value: v, rank: rankValue[v] });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Перемешивание<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deck.sort(() =&gt; Math.random() - 0.5);</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Раздача по 6 карт<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players.forEach(p =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; p.hand = deck.splice(0, 6);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sortHand(p.hand);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Козырь<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const trumpCard = deck[deck.length - 1];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; trumpSuit = trumpCard.suit;</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Определение первого ходящего (у кого младший козырь)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let minTrump = 15;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let firstPlayer = 0;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players.forEach((p, pIdx) =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; p.hand.forEach(c =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (c.suit === trumpSuit &amp;&amp; c.rank &lt; minTrump) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; minTrump = c.rank;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; firstPlayer = pIdx;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attackerIdx = firstPlayer;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defenderIdx = (attackerIdx + 1) % 3;</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderTrump(trumpCard);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; startTurn();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function sortHand(hand) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hand.sort((a, b) =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (a.suit === trumpSuit &amp;&amp; b.suit !== trumpSuit) return 1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (b.suit === trumpSuit &amp;&amp; a.suit !== trumpSuit) return -1;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return a.rank - b.rank;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function renderTrump(card) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const container = document.getElementById(&#39;trump-container&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; container.innerHTML = createCardHTML(card);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function createCardHTML(card, isHidden = false) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isHidden) return `&lt;div class=&quot;card back&quot;&gt;&lt;/div&gt;`;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const isRed = card.suit === &#39;&hearts;&#39; || card.suit === &#39;&diams;&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return `&lt;div class=&quot;card ${isRed ? &#39;red&#39; : &#39;&#39;}&quot; onclick=&quot;selectCard(&#39;${card.value}&#39;, &#39;${card.suit}&#39;)&quot;&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;${card.value}&lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div style=&quot;align-self: center; font-size: 18px;&quot;&gt;${card.suit}&lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div style=&quot;align-self: flex-end;&quot;&gt;${card.value}&lt;/div&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;`;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function selectCard(val, suit) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (players[0].isBot || gamePhase === &#39;defense&#39; &amp;&amp; defenderIdx !== 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Если ход игрока-защитника, кликом выбираем одну карту для ответа<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (defenderIdx === 0 &amp;&amp; table.length &gt; 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const unbeatPair = table.find(p =&gt; !p.defense);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (unbeatPair) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const cardIdx = players[0].hand.findIndex(c =&gt; c.value === val &amp;&amp; c.suit === suit);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (cardIdx !== -1) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const card = players[0].hand[cardIdx];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (canBeat(unbeatPair.attack, card, trumpSuit)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players[0].hand.splice(cardIdx, 1);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unbeatPair.defense = card;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; selectedCards = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; checkAttackContinuation();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert(&quot;Этой картой нельзя побить!&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Логика выбора карт для атаки или подкидывания<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const idx = selectedCards.findIndex(c =&gt; c.value === val &amp;&amp; c.suit === suit);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (idx &gt; -1) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; selectedCards.splice(idx, 1);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Проверка на соответствие номиналам на столе (если стол не пустой)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (table.length &gt; 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const tableValues = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.forEach(p =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tableValues.push(p.attack.value);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (p.defense) tableValues.push(p.defense.value);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!tableValues.includes(val)) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert(&quot;Такую карту нельзя подкидывать!&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Проверка на перевод (если фаза перевода доступна)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gamePhase === &#39;transfer&#39; &amp;&amp; table.length === 1 &amp;&amp; table[0].attack.value === val) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Разрешаем перевод<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; selectedCards.push({ value: val, suit: suit });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function canBeat(attCard, defCard, trump) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (defCard.suit === trump &amp;&amp; attCard.suit !== trump) return true;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (defCard.suit === attCard.suit &amp;&amp; defCard.rank &gt; attCard.rank) return true;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return false;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function startTurn() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; selectedCards = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gamePhase = &#39;attack&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (players[attackerIdx].isBot) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(botAttack, 1000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(`Ваш ход (атака на ${players[defenderIdx].name})`);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function botAttack() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const bot = players[attackerIdx];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (bot.hand.length === 0) { endTurnClean(); return; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Бот ходит самой младшей не козырной картой<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let cardToAttack = bot.hand.find(c =&gt; c.suit !== trumpSuit) || bot.hand[0];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bot.hand = bot.hand.filter(c =&gt; !(c.value === cardToAttack.value &amp;&amp; c.suit === cardToAttack.suit));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.push({ attack: cardToAttack, defense: null });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gamePhase = &#39;defense&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(botDefendOrTransfer, 1000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function botDefendOrTransfer() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const defender = players[defenderIdx];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const unbeatPair = table[table.length - 1];</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Проверка на перевод (если бот-защитник может и хочет перевести)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let canTransfer = false;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (table.length === 1 &amp;&amp; gamePhase === &#39;transfer&#39;) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const transferCard = defender.hand.find(c =&gt; c.value === unbeatPair.attack.value);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (transferCard &amp;&amp; defender.hand.length &gt; 2) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Переводим<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defender.hand = defender.hand.filter(c =&gt; !(c.value === transferCard.value &amp;&amp; c.suit === transferCard.suit));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.push({ attack: transferCard, defense: null });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attackerIdx = defenderIdx;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defenderIdx = (defenderIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(`${defender.name} переводит карты на ${players[defenderIdx].name}!`);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(botDefendOrTransfer, 1500);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Обычная защита бота<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const defCard = defender.hand.find(c =&gt; canBeat(unbeatPair.attack, c, trumpSuit));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (defCard) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defender.hand = defender.hand.filter(c =&gt; !(c.value === defCard.value &amp;&amp; c.suit === defCard.suit));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unbeatPair.defense = defCard;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(`${defender.name} отбился.`);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(botSubAttackOrEnd, 1000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Бот берет карты<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(`${defender.name} берет карты!`);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(() =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.forEach(p =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defender.hand.push(p.attack);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (p.defense) defender.hand.push(p.defense);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sortHand(defender.hand);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Пропуск хода отбивающегося, ход переходит к следующему за ним<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attackerIdx = (defenderIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defenderIdx = (attackerIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; refillHands();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; startTurn();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 1500);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function botSubAttackOrEnd() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Боты могут подкидывать<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const attacker = players[attackerIdx];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const allValues = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.forEach(p =&gt; { allValues.push(p.attack.value); if(p.defense) allValues.push(p.defense.value); });</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const subCard = attacker.hand.find(c =&gt; allValues.includes(c.value));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (subCard &amp;&amp; table.length &lt; 6) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attacker.hand = attacker.hand.filter(c =&gt; !(c.value === subCard.value &amp;&amp; c.suit === subCard.suit));<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.push({ attack: subCard, defense: null });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gamePhase = &#39;defense&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(`${attacker.name} подкидывает карту.`);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(botDefendOrTransfer, 1000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Отбой<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(`Карты побиты! Бито.`);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(endTurnClean, 1500);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function endTurnClean() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attackerIdx = (attackerIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defenderIdx = (attackerIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; refillHands();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; startTurn();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function refillHands() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players.forEach(p =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (p.hand.length &lt; 6 &amp;&amp; deck.length &gt; 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; p.hand.push(deck.pop());<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sortHand(p.hand);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function handleAction() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Кнопка действий игрока (Подкинуть, Бито или Взять)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (attackerIdx === 0 &amp;&amp; gamePhase === &#39;attack&#39;) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (selectedCards.length === 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Завершение атаки / Бито<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setStatus(&quot;Вы записали &laquo;Бито&raquo;.&quot;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(endTurnClean, 1000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Подкидывание карт игроком<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; selectedCards.forEach(sc =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const idx = players[0].hand.findIndex(c =&gt; c.value === sc.value &amp;&amp; c.suit === sc.suit);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (idx !== -1) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players[0].hand.splice(idx, 1);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.push({ attack: sc, defense: null });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; selectedCards = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gamePhase = &#39;defense&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Ход переходит к боту-защитнику<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(botDefendOrTransfer, 1000);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (defenderIdx === 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Игрок берет карты<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.forEach(p =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players[0].hand.push(p.attack);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (p.defense) players[0].hand.push(p.defense);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sortHand(players[0].hand);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table = [];<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attackerIdx = (defenderIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; defenderIdx = (attackerIdx + 1) % 3;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; refillHands();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; startTurn();<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function updateUI() {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&#39;deck-count&#39;).innerText = `Колода: ${deck.length}`;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&#39;bot1-info&#39;).innerText = `${players[1].name} (Карт: ${players[1].hand.length})`;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&#39;bot2-info&#39;).innerText = `${players[2].name} (Карт: ${players[2].hand.length})`;</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Отрисовка поля боя<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const field = document.getElementById(&#39;battle-field&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; field.innerHTML = &#39;&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; table.forEach(pair =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const pairDiv = document.createElement(&#39;div&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pairDiv.className = &#39;pair&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pairDiv.innerHTML = createCardHTML(pair.attack) + (pair.defense ? createCardHTML(pair.defense) : &#39;&lt;div class=&quot;card back&quot; style=&quot;opacity:0.5&quot;&gt;&lt;/div&gt;&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; field.appendChild(pairDiv);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Отрисовка руки игрока<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const handDiv = document.getElementById(&#39;player-hand&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; handDiv.innerHTML = &#39;&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; players[0].hand.forEach(c =&gt; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const isSelected = selectedCards.some(sc =&gt; sc.value === c.value &amp;&amp; sc.suit === c.suit);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const isRed = c.suit === &#39;&hearts;&#39; || c.suit === &#39;&diams;&#39;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const cardEl = document.createElement(&#39;div&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cardEl.className = `card ${isRed ? &#39;red&#39; : &#39;&#39;} ${isSelected ? &#39;selected&#39; : &#39;&#39;}`;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cardEl.innerHTML = `&lt;div&gt;${c.value}&lt;/div&gt;&lt;div style=&quot;align-self: center; font-size: 18px;&quot;&gt;${c.suit}&lt;/div&gt;&lt;div style=&quot;align-self: flex-end;&quot;&gt;${c.value}&lt;/div&gt;`;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cardEl.onclick = () =&gt; selectCard(c.value, c.suit);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; handDiv.appendChild(cardEl);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Настройка кнопки действий<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const btn = document.getElementById(&#39;action-btn&#39;);<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btn.disabled = false;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (attackerIdx === 0 &amp;&amp; table.length === 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btn.innerText = &quot;Завершить ход (Бито)&quot;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (attackerIdx === 0 &amp;&amp; table.length &gt; 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btn.innerText = selectedCards.length &gt; 0 ? &quot;Подкинуть&quot; : &quot;Бито / Хватит&quot;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (defenderIdx === 0) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btn.innerText = &quot;Беру&quot;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btn.disabled = true;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; btn.innerText = &quot;Ход противника...&quot;;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; function setStatus(text) {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(&#39;status&#39;).innerText = text;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Запуск игры при загрузке<br />
+&nbsp; &nbsp; &nbsp; &nbsp; initGame();<br />
+&nbsp; &nbsp; &lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</p>
+</body>
+</html>
